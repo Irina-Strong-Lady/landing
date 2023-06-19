@@ -19,8 +19,8 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Добро пожаловать!</a>
-                <a class="btn btn-primary" href="https://t.me/brain_iobot">Оставить заявку в Telegram</a>
+                <h1><a class="navbar-brand" href="#!">Добрый день, задайте Ваш вопрос!</a></h1>
+                <a class="btn btn-primary" href="https://t.me/brain_iobot"><b>Оставить заявку в Telegram</b></a>
             </div>
         </nav>
         <!-- Masthead-->
@@ -30,7 +30,7 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Оставьте Ваш email. С Вами незамедлительно свяжется специалист!</h1>
+                            <h2 class="mb-5">Оставьте Ваш email. С Вами незамедлительно свяжется специалист!</h2>
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->
@@ -44,10 +44,10 @@
                                 <div class="row">
                                     <div class="col">
                                         <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Ваш Email адрес" name="email"/>
-                                        {{ success }}
-                                        <p class="text-center"> {{ repeat }}</p>
+                                        <p class="text-center">{{ success }}</p>
+                                        <p class="text-center">{{ repeat }}</p>
                                     </div>                                    
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Отправить</button></div>
+                                    <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit"><b>Отправить</b></button></div>
                                 </div>
                                 <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Ошибка отправки сообщения!</div></div>
                             </form>
