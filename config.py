@@ -26,7 +26,14 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    Config.create_db()    
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    Config.create_db()
+
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-test.sqlite')
+    WTF_CSRF_ENABLED = False
+    Config.create_db()   
     
 class ProductionConfig(Config):
     DEBUG = False
@@ -35,6 +42,7 @@ class ProductionConfig(Config):
 config = {
     'development': DevelopmentConfig,
     'production': ProductionConfig,
+    'testing': TestingConfig,
 
     'default': DevelopmentConfig
 }
