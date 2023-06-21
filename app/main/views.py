@@ -20,9 +20,9 @@ def get_email():
             db.session.add(user)
             db.session.commit()
         else:
-            message = f'Мы рады снова видеть Вас {email}! Oтвет будет направлен в ближайшее время!'
+            message = f'Мы рады снова видеть Вас {email}! Специалист свяжется с Вами в ближайшее время!'
             return render_template('index.html', repeat=message)
-        message = f'Ответ на адрес {email} будет направлен в ближайшее время!'
+        message = f'Специалист свяжется с Вами по адресу {email} в ближайшее время!'
         return render_template('index.html', success=message)
     return redirect(url_for('main.index'))
 

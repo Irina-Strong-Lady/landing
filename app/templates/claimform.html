@@ -11,11 +11,8 @@
         <h1><a class="navbar-brand"></h1>            
         <ul class="list-inline mb-0">
             <li class="list-inline-item me-4">
-                <a class="text-lg-end text-primary" style="margin-right: 30px;" href="{{ url_for('main.index') }}"><b>Вернуться на начальную страницу</b></a>
-                <a href="https://t.me/brain_iobot"><i class="bi-telegram fs-3"></i></a>
+                <a class="text-lg-end text-primary" style="margin-right: 30px; font-size: large;" href="{{ url_for('main.index') }}"><b>Вернуться на начальную страницу</b></a>
             </li>
-                <a class="text-lg-end text-primary" href="https://t.me/brain_iobot"><b>Telegram</b></a>                    
-                <a class="text-lg-end text-primary" style="margin-left: 5px;" href="https://t.me/brain_iobot"><b>(оставить заявку)</b></a>
         </ul>
     </div>
 </nav>
@@ -47,12 +44,39 @@
                         {{ csrf_token }}
                         {{ form.hidden_tag() }}
                         {{ wtf.form_errors(form, hiddens="only") }}
-                        {{ wtf.form_field(form.name) }}
-                        {{ wtf.form_field(form.email) }}
-                        {{ wtf.form_field(form.phone_number) }}
-                        {{ wtf.form_field(form.location) }}   
-                        {{ wtf.form_field(form.fabula, style="min-height: 250px") }}
-                        <div style="float: center; margin-top: 20px;"> 
+                        <h4 class="text-center">Как к Вам обращаться?</h4>
+                        {{ wtf.form_field(form.name, class="form-control form-control-lg") }}
+                        {% if form.name.errors %}
+                        <ul class="error" style="color:rgb(220, 20, 20)">
+                            {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <h4 class="text-center" style="margin-top: 25px;">Ваш Email</h4>
+                        {{ wtf.form_field(form.email, class="form-control form-control-lg") }}
+                        {% if form.email.errors %}
+                        <ul class="error" style="color:rgb(220, 20, 20)">
+                            {% for error in form.email.errors %}                            
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <h4 class="text-center" style="margin-top: 25px;">Ваш номер телефона</h4>
+                        {{ wtf.form_field(form.phone_number, class="form-control form-control-lg") }}
+                        {% if form.phone_number.errors %}
+                        <ul class="error" style="color:rgb(220, 20, 20)">
+                            {% for error in form.phone_number.errors %}
+                            {% set error = 'Неверный формат номера' %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <h4 class="text-center" style="margin-top: 25px;">Ваш населенный пункт</h4>
+                        {{ wtf.form_field(form.location, class="form-control form-control-lg") }}   
+                        <h4 class="text-center" style="margin-top: 25px;">Изложите Ваш вопрос</h4>
+                        {{ wtf.form_field(form.fabula, class="form-control form-control-lg", style="min-height: 250px") }}
+                        <div style="float: center; margin-top: 25px;"> 
                         {{ wtf.form_field(form.submit, button_map={'submit': 'btn btn-primary btn-lg'}) }}                        
                         </div> 
                     </form>
@@ -62,7 +86,4 @@
     </div>
 </header>
 {% endblock %}
-
-
-
 {% endblock %}
