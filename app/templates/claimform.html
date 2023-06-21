@@ -8,19 +8,18 @@
 <!-- Navigation-->
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
-        <h1><a class="navbar-brand" href="#!"><em>Добрый день! Изложите Ваш вопрос.</em></a></h1>
-        <a class="btn btn-primary" href="{{ url_for('main.claim_form') }}"><b>Оставить заявку</b></a>
+        <h1><a class="navbar-brand"></h1>            
         <ul class="list-inline mb-0">
             <li class="list-inline-item me-4">
+                <a class="text-lg-end text-primary" style="margin-right: 30px;" href="{{ url_for('main.index') }}"><b>Вернуться на начальную страницу</b></a>
                 <a href="https://t.me/brain_iobot"><i class="bi-telegram fs-3"></i></a>
             </li>
                 <a class="text-lg-end text-primary" href="https://t.me/brain_iobot"><b>Telegram</b></a>                    
-                <a class="text-lg-end text-primary" style="margin-left:5px;" href="https://t.me/brain_iobot"><b>(оставить заявку)</b></a>
+                <a class="text-lg-end text-primary" style="margin-left: 5px;" href="https://t.me/brain_iobot"><b>(оставить заявку)</b></a>
         </ul>
     </div>
 </nav>
 {% endblock %}
-<!-- Masthead-->
 {% block header %}
 <header class="masthead">
     <div class="container position-relative">
@@ -31,7 +30,7 @@
                     <h1 class="mb-5"><em>Бюро юридических услуг</em></h1>
                 <div class="text-center text-white">
                     <!-- Page heading-->
-                    <h2 class="mb-5">Оставьте Ваш email. С Вами незамедлительно свяжется специалист!</h2>
+                    <h2 class="mb-5">Пожалуйста, заполните форму!</h2>
                     <!-- Signup form-->
                     <!-- * * * * * * * * * * * * * * *-->
                     <!-- * * SB Forms Contact Form * *-->
@@ -40,16 +39,22 @@
                     <!-- To make this form functional, sign up at-->
                     <!-- https://startbootstrap.com/solution/contact-forms-->
                     <!-- to get an API token!-->
-                    <form action="{{ url_for('main.get_email') }}" class="form-subscribe" id="contactForm" method="post">
-                        <!-- Email address input-->
-                        <div class="row">
-                            <div class="col">
-                                <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Ваш Email адрес" name="email"/>
-                                <p class="text-center" style="margin-top: 10px;">{{ success }}{{ repeat }}</p>
-                            </div>                                    
-                            <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit"><b>Отправить</b></button></div>
-                        </div>
-                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Ошибка отправки сообщения!</div></div>
+                    <!--<form action="{{ url_for('main.get_email') }}" class="form-subscribe" id="contactForm" method="post">-->
+                    
+                    <!--Claim info input-->
+                    <p class="text-center text-black" style="margin-top: 10px;">{{ success }}</p>            
+                    <form action="" method="post">
+                        {{ csrf_token }}
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_errors(form, hiddens="only") }}
+                        {{ wtf.form_field(form.name) }}
+                        {{ wtf.form_field(form.email) }}
+                        {{ wtf.form_field(form.phone_number) }}
+                        {{ wtf.form_field(form.location) }}   
+                        {{ wtf.form_field(form.fabula, style="min-height: 250px") }}
+                        <div style="float: center; margin-top: 20px;"> 
+                        {{ wtf.form_field(form.submit, button_map={'submit': 'btn btn-primary btn-lg'}) }}                        
+                        </div> 
                     </form>
                 </div>
             </div>
@@ -57,4 +62,7 @@
     </div>
 </header>
 {% endblock %}
+
+
+
 {% endblock %}

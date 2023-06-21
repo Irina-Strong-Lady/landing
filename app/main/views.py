@@ -1,7 +1,8 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from . import main
 from .. import db
-from .. models import User
+from .. models import User, Claim
+from . forms import ClaimEditForm
 
 @main.route('/')
 def index():    
@@ -24,4 +25,24 @@ def get_email():
         message = f'Ответ на адрес {email} будет направлен в ближайшее время!'
         return render_template('index.html', success=message)
     return redirect(url_for('main.index'))
+
+@main.route('/claim', methods=['GET', 'POST'])
+def claim_form():
+    form = ClaimEditForm()
+    user = User()
+    claim = Claim()
+    if form.validate_on_submit():
+        user.name = form.name.data
+        user.email = form.email.data
+        user.phone_number = form.phone_number.data
+        claim.fabula = form.fabula.data
+        db.session.add(user)
+        db.session.add(claim)
+        db.session.commit()
+        if isinstance(form.name.data, str) and form.name.data[-1] in ['а', 'a']:
+            message = f'Уважаемая {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'
+        else:
+            message = f'Уважаемый {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'
+        return render_template('index.html', success=message)
+    return render_template('claimform.html', form=form)
     

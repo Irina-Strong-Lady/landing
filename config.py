@@ -5,7 +5,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'a5b88d557bee98d2b8ab356b01d6f41e'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # SQLALCHEMY_DATABASE_URI = 'mysql://u2105133_mysql:swordfish1@localhost:3306/u2105133_mysql'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     
     @staticmethod
@@ -26,12 +25,14 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+                              'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
     Config.create_db()
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-test.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+                              'sqlite:///' + os.path.join(basedir, 'data-test.sqlite')
     WTF_CSRF_ENABLED = False
     Config.create_db()   
     
