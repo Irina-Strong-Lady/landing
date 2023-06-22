@@ -39,7 +39,11 @@
                     <!--<form action="{{ url_for('main.get_email') }}" class="form-subscribe" id="contactForm" method="post">-->
                     
                     <!--Claim info input-->
-                    <p class="text-center text-black" style="margin-top: 10px;">{{ success }}</p>            
+                    <p class="text-center text-info" style="font-size: x-large;">{{ success }}</p>            
+                    {% if success %}
+                    <p><a class="text-center text-white" style="margin-bottom: 25px; font-size: x-large;" href="{{ url_for('main.claim_form') }}">Подать ещё одну заявку</a></p>
+                    {% endif %}
+                    {% if not success %}
                     <form action="" method="post">
                         {{ csrf_token }}
                         {{ form.hidden_tag() }}
@@ -80,6 +84,7 @@
                         {{ wtf.form_field(form.submit, button_map={'submit': 'btn btn-primary btn-lg'}) }}                        
                         </div> 
                     </form>
+                    {% endif  %}
                 </div>
             </div>
         </div>

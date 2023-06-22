@@ -44,6 +44,6 @@ def claim_form():
             message = f'Уважаемая {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'
         else:
             message = f'Уважаемый {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'
-        return render_template('index.html', success=message)
+        return render_template('claimform.html', form=form, success=message)
     return render_template('claimform.html', form=form)
     
