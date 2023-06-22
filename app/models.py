@@ -20,5 +20,8 @@ class Claim(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+    def __init__(self, user):
+        self.user_id = user.id
+
     def __repr__(self):
         return '<Claim %r>' % self.id

@@ -30,13 +30,14 @@ def get_email():
 def claim_form():
     form = ClaimEditForm()
     user = User()
-    claim = Claim()
     if form.validate_on_submit():
         user.name = form.name.data
         user.email = form.email.data
-        user.phone_number = form.phone_number.data
-        claim.fabula = form.fabula.data
+        user.phone_number = form.phone_number.data        
         db.session.add(user)
+        db.session.flush()
+        claim = Claim(user)
+        claim.fabula = form.fabula.data                
         db.session.add(claim)
         db.session.commit()
         if isinstance(form.name.data, str) and form.name.data[-1] in ['а', 'a']:
