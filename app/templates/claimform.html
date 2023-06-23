@@ -24,10 +24,12 @@
             <div class="col-xl-6">
                 <div class="text-center text-info">
                     <!-- Page heading-->
-                    <h1 class="mb-5"><em>Бюро юридических услуг</em></h1>
+                    <h1 class="mb-5"><em>Центр правовой помощи при банкротстве</em></h1>
                 <div class="text-center text-white">
                     <!-- Page heading-->
+                    {% if not success %}
                     <h2 class="mb-5">Пожалуйста, заполните форму!</h2>
+                    {% endif %}
                     <!-- Signup form-->
                     <!-- * * * * * * * * * * * * * * *-->
                     <!-- * * SB Forms Contact Form * *-->

@@ -1,0 +1,4 @@
+Клиент {{ user.name }} {{ user.email }} оставил заявку. 
+Данные клиента: {{ user.name }}, {{ user.phone_number }}.
+Время обращения: {{ claim.timestamp }}
+Содержание заявки: {{ claim.fabula }}

@@ -1,5 +1,6 @@
 alembic==1.11.1
 aniso8601==8.0.0
+blinker==1.6.2
 certifi==2022.12.7
 charset-normalizer==3.1.0
 click==7.1.2
@@ -10,6 +11,7 @@ dominate==2.8.0
 email-validator==2.0.0.post2
 Flask==1.1.2
 Flask-Bootstrap4==4.0.2
+Flask-Mail==0.9.1
 Flask-Migrate==2.0.1
 Flask-RESTful==0.3.8
 Flask-Script @ git+https://github.com/Irina-Strong-Lady/flasksite.git@1a677241dc8ce0afa94b2513d3f6bf625393d4e2

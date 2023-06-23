@@ -38,7 +38,7 @@ class FlaskClientTestCase(unittest.TestCase):
         self.assertTrue(re.search('john@example.com', data))
         self.assertTrue('Специалист свяжется с Вами по адресу john@example.com в ближайшее время!' in data)
     
-    def test_claim_form(self):
+    def test_claim_form_male_user(self):
         # Заполнение формы заявки
         response = self.client.post(url_for('main.claim_form'), data={
             'name': 'Иван',
@@ -49,15 +49,37 @@ class FlaskClientTestCase(unittest.TestCase):
             })
         data = response.get_data(as_text=True)
         self.assertTrue(re.search('Уважаемый Иван! Заявка принята.', data))
-
-    def test_claim_error(self):
+        self.assertFalse(re.search('Уважаемая Иван! Заявка принята.', data))
+        self.assertFalse(re.search('Пожалуйста, заполните форму!', data))
+        
+    
+    def test_claim_form_female_user(self):
         # Заполнение формы заявки
         response = self.client.post(url_for('main.claim_form'), data={
-            'name': 'Иван',
-            'email': 'john@example',
+            'name': 'Ирина',
+            'email': 'john@example.com',
             'phone_number': '89001011010',
             'location': 'Краснодар',
             'fabula': 'Привет'
             })
         data = response.get_data(as_text=True)
+        self.assertTrue(re.search('Уважаемая Ирина! Заявка принята.', data))
+        self.assertFalse(re.search('Уважаемый Ирина! Заявка принята.', data))
+        self.assertFalse(re.search('Пожалуйста, заполните форму!', data))
+
+    def test_claim_fill_error(self):        
+        response = self.client.post(url_for('main.claim_form'), data={
+            # Ошибка при внесении имени (должно состоять из одного слова)
+            'name': 'Иван Иванов',
+            # Ошибка при внесении email (в тесте венсено без расширения)
+            'email': 'john@example',
+            # Ошибка при внесении номера телефона (в тесте не хватает последней цифры)
+            'phone_number': '8900101101',
+            'location': 'Краснодар',
+            'fabula': 'Привет'
+            })
+        data = response.get_data(as_text=True)
+        self.assertTrue(re.search('Имя должно содержать только одно слово на кириллице либо латинице', data))
         self.assertTrue(re.search('Формат email не соответствует установленным правилам', data))
+        self.assertTrue(re.search('Неверный формат номера', data))
+        self.assertTrue(re.search('Пожалуйста, заполните форму!', data))

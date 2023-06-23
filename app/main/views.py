@@ -1,8 +1,10 @@
+import os
 from flask import render_template, request, redirect, url_for, flash
 from . import main
 from .. import db
 from .. models import User, Claim
 from . forms import ClaimEditForm
+from app.email import send_email
 
 @main.route('/')
 def index():    
@@ -31,19 +33,22 @@ def claim_form():
     form = ClaimEditForm()
     user = User()
     if form.validate_on_submit():
-        user.name = form.name.data
-        user.email = form.email.data
-        user.phone_number = form.phone_number.data        
+        user = User(name=form.name.data,
+                    email = form.email.data,
+                    phone_number = form.phone_number.data
+                    )
         db.session.add(user)
         db.session.flush()
         claim = Claim(user)
-        claim.fabula = form.fabula.data                
+        setattr(claim, 'fabula', form.fabula.data)
         db.session.add(claim)
         db.session.commit()
+        send_email(os.environ.get('APP_ADMIN'), f'Заявка № {claim.id}', 'mail/send_admin', user=user, claim=claim)
+        send_email(user.email, f'Номер Вашей заявки (заявка № {claim.id})', 'mail/send_user', user=user, claim=claim)
         if isinstance(form.name.data, str) and form.name.data[-1] in ['а', 'a']:
             message = f'Уважаемая {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'
         else:
-            message = f'Уважаемый {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'
+            message = f'Уважаемый {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'        
         return render_template('claimform.html', form=form, success=message)
     return render_template('claimform.html', form=form)
     
