@@ -36,7 +36,7 @@ class FlaskClientTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.get_data(as_text=True)
         self.assertTrue(re.search('john@example.com', data))
-        self.assertTrue('Специалист свяжется с Вами по адресу john@example.com в ближайшее время!' in data)
+        self.assertTrue('Специалист свяжется с Вами по адресу john@example.com!' in data)
     
     def test_claim_form_male_user(self):
         # Заполнение формы заявки

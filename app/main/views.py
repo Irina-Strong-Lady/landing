@@ -17,14 +17,17 @@ def get_email():
         email = request.form.get('email')
         user = User.query.filter_by(email=email).first()
         if not user:
-            user = User()
-            setattr(user, 'email', email)
+            user = User(email=email)
             db.session.add(user)
             db.session.commit()
+            message = f'Специалист свяжется с Вами по адресу {user.email}!'
+            send_email(os.environ.get('APP_ADMIN'), f'Обращение без заявки от клиента {user.email}', 'mail/email_only_admin', user=user)
+            send_email(user.email, f'Ответ специалиста придет на {user.email} ', 'mail/email_only_user', user=user)
         else:
-            message = f'Мы рады снова видеть Вас {email}! Специалист свяжется с Вами в ближайшее время!'
+            message = f'Мы рады снова видеть Вас {user.email}! Специалист свяжется с Вами!'
+            send_email(os.environ.get('APP_ADMIN'), f'Обращение без заявки от клиента {user.email}', 'mail/email_only_admin', user=user)
+            send_email(user.email, f'Ответ специалиста придет на {user.email} ', 'mail/email_only_user', user=user)
             return render_template('index.html', repeat=message)
-        message = f'Специалист свяжется с Вами по адресу {email} в ближайшее время!'
         return render_template('index.html', success=message)
     return redirect(url_for('main.index'))
 
