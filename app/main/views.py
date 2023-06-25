@@ -12,7 +12,6 @@ def index():
 
 @main.route('/email', methods=['GET', 'POST'])
 def get_email():
-    user = User()   
     if request.method == 'POST' and request.form.get('email') != '':
         email = request.form.get('email')
         user = User.query.filter_by(email=email).first()
@@ -43,7 +42,7 @@ def claim_form():
         db.session.add(user)
         db.session.flush()
         claim = Claim(user)
-        setattr(claim, 'fabula', form.fabula.data)
+        claim.fabula = form.fabula.data
         db.session.add(claim)
         db.session.commit()
         send_email(os.environ.get('APP_ADMIN'), f'Заявка № {claim.id}', 'mail/send_admin', user=user, claim=claim)

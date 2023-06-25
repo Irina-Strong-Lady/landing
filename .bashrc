@@ -1,8 +1,8 @@
 # constant settings
 export APP_ADMIN=iogontar@gmail.com
-export MAIL_USERNAME=gontar.irina84@yandex.ru
-export MAIL_PASSWORD=oulvhlsuarecygab
-export MAIL_SERVER=smtp.yandex.ru
+export MAIL_USERNAME=pravo@irina23.site
+export MAIL_PASSWORD=swordfish1
+export MAIL_SERVER=mail.irina23.site
 export MAIL_PORT=587
 
 # production
