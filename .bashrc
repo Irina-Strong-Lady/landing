@@ -4,6 +4,7 @@ export MAIL_USERNAME=pravo@irina23.site
 export MAIL_PASSWORD=swordfish1
 export MAIL_SERVER=mail.irina23.site
 export MAIL_PORT=587
+export TELEBOT=5853561544:AAFOJg0BzxZJ5v4_6JSmP4hxzU0MgmafLjU
 
 # production
 export APP_CONFIG=production

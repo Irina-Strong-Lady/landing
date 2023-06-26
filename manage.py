@@ -1,5 +1,5 @@
 import os
-from app import create_app, db
+from app import create_app, db, bot
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
 
@@ -10,7 +10,7 @@ if os.environ.get('TEST_COVERAGE'):
     COV.start()
 
 app = create_app(os.environ.get('APP_CONFIG') or 'default')
-manager = Manager(app)
+manager = Manager(app, bot)
 migrate = Migrate(app, db)
 
 @app.shell_context_processor
