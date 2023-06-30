@@ -1,12 +1,16 @@
-from . import bot
+import os
+from os.path import join, dirname
+import requests
+from dotenv import load_dotenv
 
-@bot.message_handler(commands=['Привет'])
-def main(message):
-    bot.send_message(message.chat.id, '<b>Добрый день, <em><u>хозяин!</u></em></b>', parse_mode='html')
+def get_from_env(key):
+    dotenv_path = join(dirname(__file__), '.env')
+    load_dotenv(dotenv_path)
+    return os.environ.get(key) # Возращаем секретный токен
 
-@bot.message_handler()
-def info(message):
-    if message.text.lower() == 'привет':
-        bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name} {message.from_user.last_name}!')
-    elif message.text.lower() == 'id':
-        bot.reply_to(message, f'ID: {message.from_user.id}')
+def send_message(chat_id, text):
+    method = 'sendMessage'
+    token = get_from_env('TELEBOT')
+    url = f'https://api.telegram.org/bot{token}/{method}'
+    data = {'chat_id': chat_id, 'text': text}
+    requests.post(url, data=data)

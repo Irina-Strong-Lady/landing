@@ -1,10 +1,11 @@
-import os
+import os, re
 from flask import render_template, request, redirect, url_for, flash
 from . import main
 from .. import db
 from .. models import User, Claim
 from . forms import ClaimEditForm
-from app.email import send_email
+from .. email import send_email
+from .. telebot import send_message
 
 @main.route('/')
 def index():    
@@ -53,4 +54,16 @@ def claim_form():
             message = f'Уважаемый {form.name.data}! Заявка принята. Ответ поступит на {form.email.data} или {form.phone_number.data}'        
         return render_template('claimform.html', form=form, success=message)
     return render_template('claimform.html', form=form)
-    
+
+
+@main.route('/process', methods=['POST'])
+def process():
+    if request.method == 'POST':
+        name = request.json.get('message', 'Сообщение отсутствует').get('chat', 'Сведения о чате отсутствуют').get('last_name', 'клиент')
+        question = request.json.get('message', 'Сообщение отсутствует').get('text', 'Сообщение отсутствует')
+        chat_id = request.json.get('message', 'Сообщение отсутствует').get('chat', 'Сведения о чате отсутствуют').get('id', 'Сведения об id отсутствуют')
+        if bool(re.search('[a-zA-Z]', question)):
+            send_message(chat_id, text=f'Добрый день! Изложите Ваш вопрос.')
+        else:
+            send_message(chat_id, text=f'Уважаемый {name}! Спасибо, что выбрали услуги нашего Центра! Ваш вопрос принят в работу. Специалист свяжется с Вами!')
+        return {'Ok': True}

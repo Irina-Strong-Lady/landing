@@ -5,3 +5,5 @@ tmp
 data-dev.sqlite
 data-test.sqlite
 .vscode
+.bashrc
+.env

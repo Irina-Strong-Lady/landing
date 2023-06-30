@@ -20,19 +20,25 @@
 {% endblock %}
 <!-- Masthead-->
 {% block header %}
-<header class="masthead">
+<header class="masthead">    
+    <!--<div><img src="{{ url_for('static', filename='assets/irina23_1.jpg') }}" style="position:absolute;" alt="irina23_1" width="384" height="330"></div>-->
     <div class="container position-relative">
         <div class="row justify-content-center">
             <div class="col-xl-6">
                 <div class="text-center text-info">
                     <!-- Page heading-->
-                    <h1 class="mb-5"><em>Центр правовой помощи при банкротстве</em></h1>
+                    <h1 class="mb-5"><em>Центр правовой помощи при банкротстве</em></h1>           
                     {% if not success %}
                     {% if not repeat %}
-                    <h2 class="mb-5"><em>Добрый день! Изложите Ваш вопрос</em></h2>
-                <div class="text-center text-white">
-                    <!-- Page heading-->                    
-                    <h2 class="mb-5">Оставьте Ваш email. С Вами свяжется специалист!</h2>                    
+                    <!--<h2 class="mb-5"><em>Добрый день! Изложите Ваш вопрос</em></h2>-->                    
+                    <div class="container position-relative text-white" style="position: absolute; font-family: 'Franklin Gothic Medium'; font-size: x-large; text-align: left;">
+                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Ваши долги - наша забота!</ul>
+                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Полное списание долгов без рисков!</ul>
+                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Поможем сохранить имущество!</ul>
+                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Вашим кейсом займется опытный юрист!</ul>
+                    <!-- Page heading-->
+                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Оставьте Ваш email. С Вами свяжется специалист!</ul>
+                    </div>
                     {% endif %}
                     {% endif %}
                     <h4 class="mb-5 text-white"><em>{{ success }}{{ repeat }}</em></h4>
