@@ -1,70 +1,117 @@
-{% extends 'base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block head %} 
-{{ super() }}
-
-{% block navbar %}
+{% extends 'base.html' %} {% import "bootstrap/wtf.html" as wtf %} {% block head
+%} {{ super() }} {% block navbar %}
 <!-- Navigation-->
 <nav class="navbar navbar-brand bg-light static-top">
-    <div class="container">
-        <a class="btn btn-primary" href="{{ url_for('main.claim_form') }}"><b>Оставить заявку на сайте</b></a>
-        <ul class="list-inline mb-0">
-            <li class="list-inline-item me-4">
-                <a href="https://t.me/brain_iobot"><i class="bi-telegram fs-3"></i></a>
-            </li>
-                <a class="text-lg-end text-primary" href="https://t.me/brain_iobot"><b>Telegram</b></a>                    
-        </ul>
-    </div>
+  <div class="container">
+    <a class="btn btn-primary" href="{{ url_for('main.claim_form') }}"
+      ><b>Оставить заявку на сайте</b></a
+    >
+    <ul class="list-inline mb-0">
+      <li class="list-inline-item me-4">
+        <a href="https://t.me/brain_iobot"><i class="bi-telegram fs-3"></i></a>
+      </li>
+      <a class="text-lg-end text-primary" href="https://t.me/brain_iobot"
+        ><b>Telegram</b></a
+      >
+    </ul>
+  </div>
 </nav>
 {% endblock %}
 <!-- Masthead-->
 {% block header %}
-<header class="masthead">    
-    <!--<div><img src="{{ url_for('static', filename='assets/irina23_1.jpg') }}" style="position:absolute;" alt="irina23_1" width="384" height="330"></div>-->
-    <div class="container position-relative">
-        <div class="row justify-content-center">
-            <div class="col-xl-6">
-                <div class="text-center text-info">
-                    <!-- Page heading-->
-                    <h1 class="mb-5"><em>Центр правовой помощи при банкротстве</em></h1>           
-                    {% if not success %}
-                    {% if not repeat %}
-                    <!--<h2 class="mb-5"><em>Добрый день! Изложите Ваш вопрос</em></h2>-->                    
-                    <div class="container position-relative text-white" style="position: absolute; font-family: 'Franklin Gothic Medium'; font-size: x-large; text-align: left;">
-                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Ваши долги - наша забота!</ul>
-                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Полное списание долгов без рисков!</ul>
-                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Поможем сохранить имущество!</ul>
-                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Вашим кейсом займется опытный юрист!</ul>
-                    <!-- Page heading-->
-                        <ul><img style="margin-right: 10px;" src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png">Оставьте Ваш email. С Вами свяжется специалист!</ul>
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                    <h4 class="mb-5 text-white"><em>{{ success }}{{ repeat }}</em></h4>
-                    <!-- Signup form-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form action="{{ url_for('main.get_email') }}" class="form-subscribe" id="contactForm" method="post">
-                        <!-- Email address input-->
-                        <div class="row">
-                            <div class="col">
-                                <input class="form-control form-control-lg" id="emailAddress" type="email" 
-                                pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" 
-                                placeholder="Ваш Email адрес" name="email"/>
-                            </div>                                    
-                            <div class="col-auto"><button class="btn btn-primary btn-lg" id="submitButton" type="submit"><b>Отправить</b></button></div>
-                        </div>
-                    </form>                    
-                </div>
+<header class="masthead">
+  <!--<div><img src="{{ url_for('static', filename='assets/irina23_1.jpg') }}" style="position:absolute;" alt="irina23_1" width="384" height="330"></div>-->
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+      <div class="col-xl-6">
+        <div class="text-center text-info">
+          <!-- Page heading-->
+          <h1 class="mb-5"><em>Центр правовой помощи при банкротстве</em></h1>
+          {% if not success %} {% if not repeat %}
+          <!--<h2 class="mb-5"><em>Добрый день! Изложите Ваш вопрос</em></h2>-->
+          <div
+            class="container position-relative text-white"
+            style="
+              position: absolute;
+              font-family: 'Franklin Gothic Medium';
+              font-size: x-large;
+              text-align: left;
+            "
+          >
+            <ul>
+              <img
+                style="margin-right: 10px"
+                src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png"
+              />Ваши долги - наша забота!
+            </ul>
+            <ul>
+              <img
+                style="margin-right: 10px"
+                src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png"
+              />Полное списание долгов без рисков!
+            </ul>
+            <ul>
+              <img
+                style="margin-right: 10px"
+                src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png"
+              />Поможем сохранить имущество!
+            </ul>
+            <ul>
+              <img
+                style="margin-right: 10px"
+                src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png"
+              />Вашим кейсом займется опытный юрист!
+            </ul>
+            <!-- Page heading-->
+            <ul>
+              <img
+                style="margin-right: 10px"
+                src="https://thumb.tildacdn.com/tild3961-3138-4435-b532-326564643432/-/resize/36x/-/format/webp/check-icon.png"
+              />Оставьте Ваш email. С Вами свяжется специалист!
+            </ul>
+          </div>
+          {% endif %} {% endif %}
+          <h4 class="mb-5 text-white"><em>{{ success }}{{ repeat }}</em></h4>
+          <!-- Signup form-->
+          <!-- * * * * * * * * * * * * * * *-->
+          <!-- * * SB Forms Contact Form * *-->
+          <!-- * * * * * * * * * * * * * * *-->
+          <!-- This form is pre-integrated with SB Forms.-->
+          <!-- To make this form functional, sign up at-->
+          <!-- https://startbootstrap.com/solution/contact-forms-->
+          <!-- to get an API token!-->
+          <form
+            action="{{ url_for('main.get_email') }}"
+            class="form-subscribe"
+            id="contactForm"
+            method="post"
+          >
+            <!-- Email address input-->
+            <div class="row">
+              <div class="col">
+                <input
+                  class="form-control form-control-lg"
+                  id="emailAddress"
+                  type="email"
+                  pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+                  placeholder="Ваш Email адрес"
+                  name="email"
+                />
+              </div>
+              <div class="col-auto">
+                <button
+                  class="btn btn-primary btn-lg"
+                  id="submitButton"
+                  type="submit"
+                >
+                  <b>Отправить</b>
+                </button>
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </header>
-{% endblock %}
-{% endblock %}
+{% endblock %} {% endblock %}
